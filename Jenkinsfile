@@ -63,9 +63,9 @@ pipeline {
                name: 'configParam',
                choices: [
                     'Select Configuration Version',
-                    'Configuration Version 0',
-                    'Configuration Version 1',
-                    'Configuration Version 2'
+                    'configVersion0',
+                    'configVersion1',
+                    'configVersion2'
                      ]
                )
             string(name: 'STACK_NAME', defaultValue: 'example-stack', description: 'Enter the CloudFormation Stack Name.')
