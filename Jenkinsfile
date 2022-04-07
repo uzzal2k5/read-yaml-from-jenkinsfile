@@ -84,13 +84,13 @@ pipeline {
         //Define Stages
         stage("Git Checkout"){
             steps {
-                def BRANCH = ("${params.Branch}" != null ) ? "${params.Branch}": "main"
+                def BRANCH = "${params.Branch}"
                 GitClone(REPOSITORY_URL,BRANCH)
             }
         }
         stage("Call Param Values"){
             steps {
-                def PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
+                def PARAM = "${params.configParam}"
                 def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
                 final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
 
