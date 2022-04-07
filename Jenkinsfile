@@ -101,7 +101,7 @@ pipeline {
         //Define Stages
         stage("Git Checkout"){
             steps {
-                def BRANCH = ("${params.Branch}" != null ) ? "${params.Branch}": "main"
+                def BRANCH =  "main"
                 GitClone(REPOSITORY_URL,BRANCH)
             }
         }
