@@ -100,19 +100,22 @@ pipeline {
 
         //Define Stages
         stage("Git Checkout"){
-            def BRANCH = ("${params.Branch}" != null ) ? "${params.Branch}": "dev"
-            GitClone(REPOSITORY_URL,BRANCH)
+            steps {
+                def BRANCH = ("${params.Branch}" != null ) ? "${params.Branch}": "dev"
+                GitClone(REPOSITORY_URL,BRANCH)
+            }
         }
         stage("Call Param Values"){
-            def PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
-            def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
-            final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
+            steps {
+                def PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
+                def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
+                final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
     
-            echo "App Name =" appName
-            echo "Control Host  Name =" controlHost
-            echo "Node Name =" nodeName
-            echo "App Tier =" appTier
-    
+                echo "App Name =" appName
+                echo "Control Host  Name =" controlHost
+                echo "Node Name =" nodeName
+                echo "App Tier =" appTier
+            }
         }
     }
 }
