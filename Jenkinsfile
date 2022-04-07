@@ -101,8 +101,7 @@ pipeline {
         //Define Stages
         stage("Git Checkout"){
             steps {
-                BRANCH="main"
-                GitClone(REPOSITORY_URL,BRANCH)
+                GitClone(REPOSITORY_URL,'main')
             }
         }
         stage("Call Param Values"){
