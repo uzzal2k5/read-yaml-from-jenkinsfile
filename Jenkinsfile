@@ -94,10 +94,7 @@ pipeline {
                 def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
                 final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
 
-                echo "App Name =" appName
-                echo "Control Host  Name =" controlHost
-                echo "Node Name =" nodeName
-                echo "App Tier =" appTier
+                sh 'scripts/deploy-stack.sh ${appName} ${controlHost} ${nodeName} ${appTier}'
             }
         }
     }
