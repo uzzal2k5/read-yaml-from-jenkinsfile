@@ -40,11 +40,11 @@ def GitClone(REPOSITORY,BRANCH ){
 def getProperties(String properties, String configParam){
     try {
         Yaml parser = new Yaml()
-        def configData = parser.load(properties)
-        def appName = config.configSet?."${configParam}"?.appApplicationName
-        def controlHost = config.configSet?."${configParam}"?.appControllerHostName
-        def nodeName = config.configSet?."${configParam}"?.appNodeName
-        def appTier = config.configSet?."${configParam}"?.appTierName
+        configData = parser.load(properties)
+        appName = config.configSet?."${configParam}"?.appApplicationName
+        controlHost = config.configSet?."${configParam}"?.appControllerHostName
+        nodeName = config.configSet?."${configParam}"?.appNodeName
+        appTier = config.configSet?."${configParam}"?.appTierName
 
         return [ appName, controlHost, nodeName,appTier ]
     }
@@ -106,9 +106,9 @@ pipeline {
         }
         stage("Call Param Values"){
             steps {
-                def PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
-                def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
-                final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
+                PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
+                CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
+                final (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
 
                 echo "App Name =" appName
                 echo "Control Host  Name =" controlHost
