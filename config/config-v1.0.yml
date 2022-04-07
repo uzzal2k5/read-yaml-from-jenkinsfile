@@ -1,0 +1,18 @@
+configSet:
+    configVersion0:
+        appApplicationName: PVAI_1.0
+        appControllerHostName: appdynamics0
+        appNodeName: Master-Server-0
+        appTierName: INGESTION-DOWNLOAD
+
+    configVersion1:
+        appApplicationName: PVAI_1.1
+        appControllerHostName: appdynamics1
+        appNodeName: Master-Server-1
+        appTierName: INGESTION-DOWNLOAD
+
+    configVersion2:
+        appApplicationName: PVAI_1.2
+        appControllerHostName: appdynamics2
+        appNodeName: Master-Server-2
+        appTierName: INGESTION-DOWNLOAD
