@@ -55,10 +55,9 @@ def getProperties(String properties, String configParam){
 }
 
 
-node {
-    properties([
-
-        parameters([
+pipeline {
+    agent any
+    parameters {
             choice(
                description: "Choose Configuration Version",
                name: 'configParam',
@@ -96,23 +95,24 @@ node {
             )
             booleanParam(name: 'TOGGLE', defaultValue: false, description: 'Are you sure you want to perform this action?')
 
-        ])
-    ])
-
-    //Define Stages
-    stage("Git Checkout"){
-        def BRANCH = ("${params.Branch}" != null ) ? "${params.Branch}": "dev"
-        GitClone(REPOSITORY_URL,BRANCH)
     }
-    stage("Call Param Values"){
-        def PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
-        def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
-        final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
+    stages {
 
-        echo "App Name =" appName
-        echo "Control Host  Name =" controlHost
-        echo "Node Name =" nodeName
-        echo "App Tier =" appTier
-
+        //Define Stages
+        stage("Git Checkout"){
+            def BRANCH = ("${params.Branch}" != null ) ? "${params.Branch}": "dev"
+            GitClone(REPOSITORY_URL,BRANCH)
+        }
+        stage("Call Param Values"){
+            def PARAM = ("${params.configParam}" != null ) ? "${params.configParam}": "configVersion0"
+            def CONFIG_FILE = readFile "${env.WORKSPACE}/config/config-v1.0.yml"
+            final def (String appName, String controlHost, String nodeName, String appTier) = getProperties(CONFIG_FILE,PARAM)
+    
+            echo "App Name =" appName
+            echo "Control Host  Name =" controlHost
+            echo "Node Name =" nodeName
+            echo "App Tier =" appTier
+    
+        }
     }
 }
