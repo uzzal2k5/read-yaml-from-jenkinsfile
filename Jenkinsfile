@@ -3,7 +3,7 @@ import groovy.json.*
 import groovy.json.JsonSlurperClassic
 import org.yaml.snakeyaml.Yaml
 
-def REPOSITORY_URL = "git@github.com:uzzal2k5/reading-yaml.git"
+def REPOSITORY_URL = "git@github.com:uzzal2k5/read-yaml-from-jenkinsfile.git"
 
 //Version & Release Specified Here
 def getVersion(def projectJson){
